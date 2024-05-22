@@ -5,8 +5,13 @@ const router = express.Router();
 
 router.post("/create-student", ProductController.createProduct);
 
-router.get('/', ProductController.getAllProduct);
+router.get('/all', ProductController.getAllProduct);
 
 router.get('/:productId',ProductController.getSingleProduct)
+
+router.delete('/:productId',ProductController.getSingleProductDelete)
+
+router.get('/',ProductController.getSearchProduct)
+
 
 export const ProductRoutes = router;

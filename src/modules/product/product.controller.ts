@@ -35,15 +35,14 @@ const getAllProduct = async (req: Request, res: Response) => {
   }
 };
 
- const getSingleProduct = async (req: Request, res: Response) => {
+const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
     const result = await ProductServices.getSingleProductFromDB(productId);
-    
 
     res.status(200).json({
       success: true,
-      message: 'received successfully',
+      message: "received successfully",
       data: result,
     });
   } catch (error) {
@@ -51,8 +50,46 @@ const getAllProduct = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleProductDelete = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result =
+      await ProductServices.getSingleProductFromDBDelete(productId);
+
+    res.status(200).json({
+      success: true,
+      message: "Delete successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getSearchProduct = async (req: Request, res: Response) => {
+  const { searchTerm } = req.query;
+  try {
+    if (searchTerm) {
+      const products = await ProductServices.getSearchProductFromDB(searchTerm as string);
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        data: products
+      });
+    } 
+  } catch (error) {
+    // res.status(500).json({ success: false, message: error.message });
+    console.log(error)
+  }
+};
+
+
+
 export const ProductController = {
   createProduct,
   getAllProduct,
   getSingleProduct,
+  getSingleProductDelete,
+  getSearchProduct,
+  
 };
