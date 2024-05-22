@@ -17,6 +17,24 @@ const getSingleProductFromDB = async (id: string) => {
   return result;
 };
 
+const getProductFromDBUpdate = async (
+  id: string,
+  updatedProductData: Partial<ProductDB>,
+) => {
+  try {
+    const filter = { _id: id };
+    const options = { new: true };
+    const updatedData = await ProductModel.findOneAndUpdate(
+      filter,
+      updatedProductData,
+      options,
+    );
+    return updatedData;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // Delete Product
 const getSingleProductFromDBDelete = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id });
@@ -34,6 +52,7 @@ export const ProductServices = {
   createProductDB,
   getAllProductFromDB,
   getSingleProductFromDB,
+  getProductFromDBUpdate,
   getSingleProductFromDBDelete,
   getSearchProductFromDB,
 };
