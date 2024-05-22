@@ -1,29 +1,31 @@
+import Product from "../product.model";
+import ProductModel from "../product.model";
+import { ProductDB } from './product.interface';
 
+const createProductDB = async (ProductData: ProductDB) => {
+  const product = new Product(ProductData);
+  const result = await ProductModel.create(product);
+  return result;
+};
 
+const getAllProductFromDB = async () => {
+  const result = await ProductModel.find();
+  return result;
+};
+  const getSingleProductFromDB = async (id: string) => {
+    const result = await ProductModel.findOne({ _id: id });
+    return result;
+  }
 
-const createProductDB = async (ProductData: TStudent) => {
-    // const result = await StudentModel.create(student);
-  
-    // built in static methods
-    const student = new Student(studentData);
-    const result = await student.save();
-    if(await student.isUserExits(studentData.id)){
-      throw new Error("user already exists")
-    }
+// Delete Product
+  const getSingleProductFromDBDelete = async (_id: string) => {
+    const result = await ProductModel.findOne({ id: _id });
+   
     return result;
   };
-  
-  const getAllStudentFromDB = async () => {
-    const result = await Student.find();
-    return result;
-  };
-  const getSingleStudentFromDB = async (id: string) => {
-    const result = await Student.findOne({ id: id });
-    return result;
-  };
-  
-  export const StudentServices = {
-    createStudentDB,
-    getAllStudentFromDB,
-    
-  };
+
+export const ProductServices = {
+  createProductDB,
+  getAllProductFromDB,
+  getSingleProductFromDB,
+};
