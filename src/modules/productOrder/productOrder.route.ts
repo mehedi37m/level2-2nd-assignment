@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/", ProductOrderController.createProduct);
 
-router.get("/all", ProductOrderController.getAllProductOrder);
+router.get("/", ProductOrderController.getAllProductOrder);
 
-router.get("/", ProductOrderController.getSearchProductOrder);
+router.get("/email", ProductOrderController.getSearchProductOrder);
 
 export const ProductOrderRoutes = router;

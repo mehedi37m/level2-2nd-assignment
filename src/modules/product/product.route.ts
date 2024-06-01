@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/create-product", ProductController.createProduct);
 
 // get all Product
-router.get("/all", ProductController.getAllProduct);
+router.get("/", ProductController.getAllProduct);
 
 router.get("/totalProduct", ProductController.getTotalProductCount);
 
@@ -14,11 +14,11 @@ router.get("/totalProduct", ProductController.getTotalProductCount);
 router.get("/:productId", ProductController.getSingleProduct);
 
 // update data
-router.put("/all/:productId", ProductController.getProductUpdate);
+router.put("/:productId", ProductController.getProductUpdate);
 
 // delete product
 router.delete("/:productId", ProductController.getSingleProductDelete);
 
-router.get("/", ProductController.getSearchProduct);
+router.get("/searchTerm", ProductController.getSearchProduct);
 
 export const ProductRoutes = router;
